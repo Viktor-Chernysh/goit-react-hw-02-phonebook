@@ -38,7 +38,9 @@ class App extends Component {
   };
   filteredContacts = () => {
     return this.state.contacts.filter(el =>
-      el.name.toLocaleLowerCase().includes(this.state.filter),
+      el.name
+        .toLocaleLowerCase()
+        .includes(this.state.filter.toLocaleLowerCase()),
     );
   };
 
