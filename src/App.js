@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import './App.css';
+import Section from './components/Section/Section';
 import Form from './components/Form';
 import Filter from './components/Filter/Filter';
 import Contacts from './components/Contacts/Contacts';
@@ -48,22 +49,15 @@ class App extends Component {
   };
 
   render() {
+    const { AddNewContact, addFilter, deleteContact, filteredContacts } = this;
     return (
-      <div>
+      <Section>
         <h1>Phonebook</h1>
-        <Form AddNewContact={this.AddNewContact} />
+        <Form AddNewContact={AddNewContact} />
         <h2>Contacts</h2>
-        <Filter filter={this.addFilter} />
-        {/* <Contacts contacts={this.state.contacts} /> */}
-        {this.state.filter === '' ? (
-          <Contacts
-            contacts={this.state.contacts}
-            deleteContact={this.deleteContact}
-          />
-        ) : (
-          <Contacts contacts={this.filteredContacts()} />
-        )}
-      </div>
+        <Filter filter={addFilter} />
+        <Contacts contacts={filteredContacts()} deleteContact={deleteContact} />
+      </Section>
     );
   }
 }

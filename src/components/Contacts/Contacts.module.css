@@ -1,0 +1,29 @@
+.contact_list {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+.contact_item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+.contact_item span {
+  margin-left: 10px;
+  font-style: oblique;
+  font-weight: 400;
+}
+.contact_item button {
+  display: block;
+  padding: 3px 20px;
+  cursor: pointer;
+  border-color: rgb(241, 245, 208);
+  margin-left: 30px;
+  border-radius: 2px;
+  background-color: #f8f7ac;
+  color: rgb(44, 44, 44);
+}
+.contact_item button:hover {
+  transform: scale(1.1);
+}
