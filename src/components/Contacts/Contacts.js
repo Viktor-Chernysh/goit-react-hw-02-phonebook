@@ -1,14 +1,22 @@
 import PropTypes from 'prop-types';
 
-export default function Contacts({ contacts }) {
+export default function Contacts({ contacts, deleteContact }) {
   return (
-    <ul>
+    <ol>
       {contacts.map(({ id, name, number }) => (
         <li key={id}>
-          {name}:<span>{number}</span> <button type="button">Delete</button>
+          {name}:<span>{number}</span>{' '}
+          <button
+            type="button"
+            onClick={() => {
+              deleteContact(id);
+            }}
+          >
+            Delete
+          </button>
         </li>
       ))}
-    </ul>
+    </ol>
   );
 }
 Contacts.propTypes = {

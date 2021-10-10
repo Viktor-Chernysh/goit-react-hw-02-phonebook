@@ -16,6 +16,15 @@ class App extends Component {
   };
 
   AddNewContact = contact => {
+    const addedName = this.state.contacts
+      .map(el => el.name.toLowerCase())
+      .includes(contact.name.toLowerCase());
+
+    if (addedName) {
+      alert(`${contact.name} is already in contacts!`);
+      return;
+    }
+
     this.setState(prevState => {
       return {
         contacts: [...prevState.contacts, contact],
@@ -23,19 +32,37 @@ class App extends Component {
     });
   };
 
-  handleFilter = e => {
-    this.setState({ filter: e.target.value });
+  addFilter = e => {
+    this.setState({ filter: e.target.value.trim() });
+  };
+  filteredContacts = () => {
+    return this.state.contacts.filter(el =>
+      el.name.toLocaleLowerCase().includes(this.state.filter),
+    );
+  };
+
+  deleteContact = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(el => el.id !== id),
+    }));
   };
 
   render() {
-    // console.log(this.state.filter);
     return (
       <div>
         <h1>Phonebook</h1>
         <Form AddNewContact={this.AddNewContact} />
         <h2>Contacts</h2>
-        <Filter filter={this.handleFilter} />
-        <Contacts contacts={this.state.contacts} />
+        <Filter filter={this.addFilter} />
+        {/* <Contacts contacts={this.state.contacts} /> */}
+        {this.state.filter === '' ? (
+          <Contacts
+            contacts={this.state.contacts}
+            deleteContact={this.deleteContact}
+          />
+        ) : (
+          <Contacts contacts={this.filteredContacts()} />
+        )}
       </div>
     );
   }
